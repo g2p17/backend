@@ -23,6 +23,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Representation of a User
+    """
     id       = models.BigAutoField(primary_key=True)
     username = models.CharField('Username', max_length=20, unique=True)
     identity_document = models.CharField('Identity Document', max_length=20, unique=True)
@@ -30,6 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     password = models.CharField('Password', max_length=256)
     name     = models.CharField('Name',     max_length=50)
     email    = models.EmailField('Email',   max_length=100, unique=True)
+    role    = models.CharField('Role',   max_length=15, default="customer")
     
     def save(self, **kwargs):
         some_salt = 'mMUj0DrIK6vgtdIYepkIxN'
