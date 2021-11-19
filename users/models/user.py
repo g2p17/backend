@@ -23,6 +23,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Representation of a User
+    """
     id       = models.BigAutoField(primary_key=True)
     username = models.CharField('Username', max_length=20, unique=True)
     identity_document = models.CharField('Identity Document', max_length=20, unique=True)
