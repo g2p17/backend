@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os
+from datetime import timedelta
 import environ
+import os
+
 
 env = environ.Env(
     # set casting, default value
@@ -49,6 +51,17 @@ INSTALLED_APPS = [
     'users',
 ]
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME'    : timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME'   : timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS'    : False,
+    'BLACKLIST_AFTER_ROTATION' : False,
+    'UPDATE_LAST_LOGIN'        : False,
+    'ALGORITHM'                : 'HS256',
+    'USER_ID_FIELD'            : 'id',
+    'USER_ID_CLAIM'            : 'user_id',
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -63,6 +76,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES' : (
         'rest_framework.permissions.AllowAny',
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )    
 }
 
 AUTH_USER_MODEL = 'users.User'
