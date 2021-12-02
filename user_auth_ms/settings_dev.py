@@ -82,6 +82,10 @@ REST_FRAMEWORK = {
     )    
 }
 
+SWAGGER_SETTINGS = {
+   'DOC_EXPANSION': 'none',
+}
+
 AUTH_USER_MODEL = 'users.User'
 
 ROOT_URLCONF = 'user_auth_ms.urls'
